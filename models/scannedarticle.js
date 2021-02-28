@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 let scannedarticleSchema = new mongoose.Schema({
     "date":String,
     "time":String,
-    "article": {
+    /*"article": {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Model"
-      }
+      }*/
     },
     {collection: "Scanned"}
     );
