@@ -19,6 +19,7 @@ console.log(err);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var azizRouter = require('./routes/statistics');
 
 var app = express();
 
@@ -34,6 +35,8 @@ app.use(express.static(path.join(__dirname, 'views')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+app.use('/pip', azizRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

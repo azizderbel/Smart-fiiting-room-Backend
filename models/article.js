@@ -8,7 +8,11 @@ let articleSchema = new mongoose.Schema({
     "couleur":String,
     "quantite":Number,
     "categorie":String,
-    "image":String
+    "image":String,
+    "scanne":[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "ScannedArticle"
+    }]
     },
     {collection: "Stock"}
     );
