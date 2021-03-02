@@ -1154,7 +1154,7 @@
     console.log(error);
   }
 
-  try {
+ /* try {
 
     // polar chart
     var ctx = document.getElementById("polarChart");
@@ -1196,7 +1196,7 @@
 
   } catch (error) {
     console.log(error);
-  }
+  }*/
 
   try {
 

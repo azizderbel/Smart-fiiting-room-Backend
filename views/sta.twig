@@ -1,0 +1,128 @@
+{% extends "index.twig" %}
+
+{% block body %}
+
+<div class="row">
+                        
+                       
+                       
+
+                            <div class="col-lg-7">
+                                <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
+
+                                    <div class="au-card-title" style="background-image:url('images/bg-title-03.png');">
+                                        <div class="bg-overlay bg-overlay--blue"></div>
+                                        
+                                            <h3>Today's Tested Articles </h3>
+                                    </div>
+
+                                    <div class="au-inbox-wrap js-inbox-wrap">
+                                        <div class="au-message js-list-load">
+                                            <div class="au-message-list">
+
+                                                {% for item in docs %}
+                                                <div class="au-message__item unread">
+                                                    <div class="au-message__item-inner">
+                                                        
+                                                        <div class="au-message__item-text">
+                                                            <div class="avatar-wrap">
+                                                                <div class="avatar">
+                                                                    <img src="images/Clothing Stock/{{item.categorie}}/{{item.image}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="text">
+                                                                <h5 class="name"></h5>
+                                                                <p>{{item.desc}}</p>
+                                                            </div>
+                                                        </div>
+
+                                                        <!--<div class="au-message__item-time">
+                                                            <span>12 Min ago</span>
+                                                        </div>-->
+                                                    </div>
+                                                </div> 
+                                                {% endfor %} 
+                                            </div> 
+                                        </div>
+                                    </div>        
+                                                
+                                                
+                                                
+                                            
+                                            <!--<div class="au-message__footer">
+                                                <button class="au-btn au-btn-load js-load-btn">load more</button>
+                                            </div>-->
+                                        
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="col-lg-5">
+                                <div class="au-card m-b-30">
+                                    <div class="au-card-inner">
+                                        <h3 class="title-2 m-b-40">Tested Categories</h3>
+                                        <canvas id="polarChart"></canvas>
+                                    </div>
+                                </div>
+                           </div>
+</div>
+
+{% endblock %}
+
+{% block addjs %}
+<script>
+let categories={"casual": 0,"sporty":0,"grunge":0,"vacation":0,"bohemian":0,"chicAndclassic":0};
+$.ajax({
+       url :'/pip/cat',
+       type : 'GET',
+       success : function(data){
+       setTimeout(next(data), 500);
+       }
+     });
+function next(categories){
+
+var ctx = document.getElementById("polarChart");
+    
+    if (ctx) {
+      ctx.height = 200;
+      var myChart = new Chart(ctx, {
+        type: 'polarArea',
+        data: {
+          datasets: [{
+            data: [categories.casual,categories.sporty,categories.grunge,categories.vacation,categories.bohemian,categories.chicAndclassic],
+            backgroundColor: [
+              "rgba(0, 123, 255,0.9)",
+              "rgba(0, 123, 255,0.8)",
+              "rgba(0, 123, 255,0.7)",
+              "rgba(0,0,0,0.2)",
+              "rgba(0, 123, 255,0.5)",
+              "rgba(0, 123, 255,0.4)"
+              
+            ]
+
+          }],
+          labels: [
+            "Casual",
+            "Sporty",
+            "Grunge",
+            "Vacation",
+            "Bohemian",
+            "ClassicChic"
+            
+          ]
+        },
+        options: {
+          legend: {
+            position: 'top',
+            labels: {
+              fontFamily: 'Poppins'
+            }
+
+          },
+          responsive: true
+        }
+      });
+    }
+}
+</script>
+{% endblock %}
