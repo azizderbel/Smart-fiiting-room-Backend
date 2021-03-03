@@ -58,7 +58,7 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fas fa-chart-bar"></i>Exemples</a>
+                                <i class="fas fa-chart-bar"></i>Stats</a>
                         </li>
                         
                         
@@ -68,7 +68,6 @@
         </aside>
         <!-- END MENU SIDEBAR-->
 
-    
         <!-- PAGE CONTAINER-->
         <div class="page-container">
             <!-- HEADER DESKTOP-->
@@ -127,168 +126,7 @@
                          {% block body %}
 
 
-
-    <!-- CHART-->
-
-<html>
-  <head>
-    <script src='https://www.gstatic.com/charts/loader.js'></script>
-    <script>
-      google.charts.load('49', {'packages': ['vegachart']}).then(drawChart);
-
-      function drawChart() {
-        const dataTable = new google.visualization.DataTable();
-        dataTable.addColumn({type: 'string', 'id': 'category'});
-        dataTable.addColumn({type: 'number', 'id': 'amount'});
-    
-        dataTable.addRows([
-          ['Lundi',0],
-          ['Mardi', 55],
-          ['Mercredi', 43],
-          ['Jeudi', 91],
-          ['Vendredi', 81],
-          ['Samedi', 53],
-          ['Dimanche', 19],
-        ]);
-
-
-        const options = {
-          "vega": {
-            "$schema": "https://vega.github.io/schema/vega/v4.json",
-            "width": 500,
-            "height": 200,
-            "padding": 5,
-
-            'data': [{'name': 'table', 'source': 'datatable'}],
-
-            "signals": [
-              {
-                "name": "tooltip",
-                "value": {},
-                "on": [
-                  {"events": "rect:mouseover", "update": "datum"},
-                  {"events": "rect:mouseout",  "update": "{}"}
-                ]
-              }
-            ],
-
-            "scales": [
-              {
-                "name": "xscale",
-                "type": "band",
-                "domain": {"data": "table", "field": "category"},
-                "range": "width",
-                "padding": 0.05,
-                "round": true
-              },
-              {
-                "name": "yscale",
-                "domain": {"data": "table", "field": "amount"},
-                "nice": true,
-                "range": "height"
-              }
-            ],
-
-            "axes": [
-              { "orient": "bottom", "scale": "xscale" },
-              { "orient": "left", "scale": "yscale" }
-            ],
-
-            "marks": [
-              {
-                "type": "rect",
-                "from": {"data":"table"},
-                "encode": {
-                  "enter": {
-                    "x": {"scale": "xscale", "field": "category"},
-                    "width": {"scale": "xscale", "band": 1},
-                    "y": {"scale": "yscale", "field": "amount"},
-                    "y2": {"scale": "yscale", "value": 0}
-                  },
-                  "update": {
-                    "fill": {"value": "steelblue"}
-                  },
-                  "hover": {
-                    "fill": {"value": "red"}
-                  }
-                }
-              },
-              {
-                "type": "text",
-                "encode": {
-                  "enter": {
-                    "align": {"value": "center"},
-                    "baseline": {"value": "bottom"},
-                    "fill": {"value": "#333"}
-                  },
-                  "update": {
-                    "x": {"scale": "xscale", "signal": "tooltip.category", "band": 0.5},
-                    "y": {"scale": "yscale", "signal": "tooltip.amount", "offset": -2},
-                    "text": {"signal": "tooltip.amount"},
-                    "fillOpacity": [
-                      {"test": "datum === tooltip", "value": 0},
-                      {"value": 1}
-                    ]
-                  }
-                }
-              }
-            ]
-          }
-        };
-
-        const chart = new google.visualization.VegaChart(document.getElementById('chart-div'));
-        chart.draw(dataTable, options);
-      }
-    </script>
-  </head>
-
-  <body>
-    <div id="chart-div" style="width: 700px; height: 250px;"></div>
-  </body>
-
-</html>
-
-    <!-- Table of articles-->
-
-
-
-<div class="table-responsive">
-  <table class="table table-striped table-bordered table-sm table-light ">
-    <thead>
-      <tr>
-        <th scope="col">Article</th>
-        <th scope="col">category</th>
-        <th scope="col">cut</th>
-        <th scope="col">quantity</th>
-        <th scope="col">description</th>
-        <th scope="col">information</th>
-        <th scope="col">number of tests</th>
-
-      </tr>
-    </thead>
-    <tbody>
-    {% for article in articles %}
-
-      <tr>
-        <td>{{article.image}}<img src="/images/Clothing Stock/{{article.categorie}}/{{article.image}}" class="ui mini rounded image"></td>
-        <td>{{article.categorie}}</td>
-        <td>{{article.taille}}</td>
-        <td>{{article.quantite}}</td>
-        <td>{{article.desc}}</td>
-        <td>{{article.infos}}</td> 
-
-        {% for i in article.scanne %}       
-
-        {%set j= loop.length %}
-        <th>{{j ~' ' ~'scanne'}}</th>
-         {% endfor %}
-      
-      
-      </tr>
-      </tbody>
-{% endfor %}
-  </table>
-</div>
+                        
                         
                         
                         {% endblock %}
@@ -332,3 +170,4 @@
 
 </html>
 <!-- end document-->
+
