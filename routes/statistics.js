@@ -23,7 +23,7 @@ router.get('/', async function(req, res, next) {
    
    for (let item of today) {array.push(item);}
    
-  console.log(array);
+  
   res.render('sta.twig', { docs: array });
 });
 
@@ -42,9 +42,7 @@ router.get('/cat', async function(req, res, next) {
   aux.bohemian=cpt;cpt=0;
  for await (const doc of Model.find({categorie:"chicAndclassic"})){cpt=cpt+doc.scanne.length;}
   aux.chicAndclassic=cpt;cpt=0;
-  
-  //console.log(aux);
-  //res.render('sta.twig');
+
   res.send(aux);    
 });
 
