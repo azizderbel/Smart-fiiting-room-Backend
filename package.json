@@ -13,6 +13,7 @@
     "jade": "~1.11.0",
     "mongoose": "^5.11.17",
     "morgan": "~1.9.1",
-    "twig": "^1.14.0"
+    "twig": "^1.14.0",
+    "vue-plugin-load-script": "^1.3.2"
   }
 }
